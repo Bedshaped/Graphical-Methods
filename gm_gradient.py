@@ -28,4 +28,7 @@ dX, dY = np.gradient(Z, ds) # Calculate the gradient on the coarse grid
 
 plt.contourf(x,y,z) #plot a contour map using the fine grid
 plt.set_cmap('coolwarm') # change color of map
-plt.quiver(X,Y,dX.T, dY.T) # plot the gradient using the coarse grid.
+plt.quiver(X,Y,dX,dY) # plot the gradient using the coarse grid.
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.savefig("gm_gradient.png", dpi=300)

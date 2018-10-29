@@ -78,8 +78,16 @@ plt.plot(yiso_x2, yiso_y2, color='b', linewidth = 3)
 plt.plot(xiso_x1, xiso_y1, color='r', linewidth = 3, label = "x-isocline")
 plt.plot(xiso_x2, xiso_y2, color='r', linewidth = 3)
 plt.legend()
+plt.savefig("gm_lv_isocline.png", dpi=300)
 
 # Plotting our integral solution from RK45
+
+textstr = '\n'.join((
+    r'$a=%.2f$' % (a, ),
+    r'$b=%.2f$' % (b, ),
+    r'$c=%.2f$' % (c, ),
+    r'$d=%.2f$' % (d, )))
+props = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
 
 plt.figure(2, figsize=(9, 6))
 plt.plot(t, x, label = "Rabbits")
@@ -87,8 +95,13 @@ plt.plot(t, v, label = "Foxes")
 plt.xlabel("Time")
 plt.ylabel("Population")
 plt.legend()
+ax = plt.gca()
+ax.text(0.05, 0.25, textstr, transform=ax.transAxes, fontsize=14,
+        verticalalignment='top', bbox=props)
+plt.savefig("gm_lv.png", dpi=300)
 
 plt.figure(3, figsize=(9, 6))
 plt.plot(x, v, 'k')
 plt.xlabel("Rabbits")
-plt.ylabel("Population")
+plt.ylabel("Foxes")
+plt.savefig("gm_lv_phase.png", dpi=300)

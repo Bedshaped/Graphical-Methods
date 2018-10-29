@@ -25,7 +25,7 @@ n = 100
 
 # Initial values
 
-x0 = [-0.25, 0.25, 1, 2, 2.5, 3.5, 5]
+x0 = [0.0, 0.25, 1, 2, 2.5, 3.5, 5]
 
 # Calculating the fixed points
 
@@ -39,6 +39,11 @@ x2, y2 = np.full(2, np.roots(coeff)[1]), [np.min(dxdt), np.max(dxdt)]
 
 # Plotting fixed point equation
 
+textstr = '\n'.join((
+    r'$r=%.2f$' % (r, ),
+    r'$K=%.2f$' % (K, )))
+props = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
+
 plt.figure(1, figsize=(9, 6))
 plt.plot(x, dxdt, label = r"$\dot{x}$ vs. x")
 plt.plot(x1, y1, linestyle = '--', label = "Stable @ $x =%d$" % np.roots(coeff)[0])
@@ -47,6 +52,7 @@ plt.xlabel("x")
 plt.ylabel(r"$\dot{x}$")
 plt.grid()
 plt.legend()
+plt.savefig("gm_verhulst_fixed_points.png", dpi=300)
 
 # RK45 solution iterated for many x0
 
@@ -71,4 +77,8 @@ plt.ylabel("x")
 plt.ylim(-5, max(x0))
 plt.grid()
 plt.legend()
+ax = plt.gca()
+ax.text(0.85, 0.95, textstr, transform=ax.transAxes, fontsize=14,
+        verticalalignment='top', bbox=props)
+plt.savefig("gm_verhulst.png", dpi=300)
 
